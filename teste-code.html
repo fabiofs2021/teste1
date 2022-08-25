@@ -1,0 +1,26 @@
+
+
+<h2>Test GET CODE</h2>
+
+<h3 id="code"></h3>
+
+<script>
+    let hash = window.location.hash;
+    hash = hash.substr(1);
+
+    console.log('Hash', hash);
+    document.getElementById('code').value = '';
+
+    var partes = hash.split('&');
+    var data = {};
+    partes.forEach(function (parte) {
+        const chaveValor = parte.split('=');
+        const chave = chaveValor[0];
+        const valor = chaveValor[1];
+        if(chave == 'code') {
+            console.log('CODE', valor);
+            document.getElementById('code').innerHTML = valor;
+        }
+    });
+
+</script>
