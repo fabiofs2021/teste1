@@ -3,6 +3,7 @@
 <h2>Test GET CODE</h2>
 
 <h3 id="code"></h3>
+<h3 id="state"></h3>
 
 <script>
     let hash = window.location.hash;
@@ -20,6 +21,10 @@
         if(chave == 'code') {
             console.log('CODE', valor);
             document.getElementById('code').innerHTML = valor;
+        }
+        if(chave == 'state') {
+            console.log('STATE', valor);
+            document.getElementById('state').innerHTML = valor;
         }
     });
 
