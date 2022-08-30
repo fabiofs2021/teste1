@@ -1,0 +1,57 @@
+
+
+<h2>Test 2 GET CODE</h2>
+
+<h3 id="code"></h3>
+<h3 id="state"></h3>
+
+<button id="post-btn">I'm a button</button>
+
+
+<script>
+    let hash = window.location.hash;
+    hash = hash.substr(1);
+    let newBody = { code: 0, state: 0 };
+
+    console.log('Hash', hash);
+    document.getElementById('code').value = '';
+
+    var partes = hash.split('&');
+    var data = {};
+    partes.forEach(function (parte) {
+        const chaveValor = parte.split('=');
+        const chave = chaveValor[0];
+        const valor = chaveValor[1];
+        if(chave == 'code') {
+            console.log('CODE', valor);
+            document.getElementById('code').innerHTML = valor;
+            newBody.code = valor;
+        }
+        if(chave == 'state') {
+            console.log('STATE', valor);
+            document.getElementById('state').innerHTML = valor;
+            newBody.state = valor;
+        }
+    });
+
+
+    console.log(newBody);
+
+    const button = document.getElementById('post-btn');
+  
+    button.addEventListener('click', async _ => {
+        try {     
+            const response = await fetch('https://paratirafael.ddns.net/bank-callback', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBody)
+        });
+        ///console.log('Location', response.headers.location);
+        console.log('Completed!', response);
+        } catch(err) {
+        console.error(`Error: ${err}`);
+        }
+    });
+</script>
